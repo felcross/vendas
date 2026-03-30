@@ -1,0 +1,36 @@
+name: PR Workflow - Quality & Tests
+
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Atualizado para v4 (mais rápido/seguro)
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4 # Atualizado para v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'gradle' # O setup-java já faz o cache do gradle automaticamente agora
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build and Run Tests
+        # O comando 'build' no Gradle já executa o 'test' por padrão.
+        # Se algum teste falhar, o build falha e o PR fica "vermelho".
+        run: ./gradlew build --stacktrace
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: always() # Garante que o relatório seja gerado mesmo se o teste falhar
+        with:
+          report_paths: '**/build/test-results/test/TEST-*.xml'
