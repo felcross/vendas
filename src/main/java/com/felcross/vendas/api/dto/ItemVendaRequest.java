@@ -1,10 +1,16 @@
 package com.felcross.vendas.api.dto;
 
 import jakarta.validation.constraints.*;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ItemVendaRequest {
-    @NotNull private Long produtoId;
-    @NotNull @Min(1) private Integer quantidade;
+    @NotBlank
+    private String produtoId;
+    @NotNull @Min(1)
+    private Integer quantidade;
 }

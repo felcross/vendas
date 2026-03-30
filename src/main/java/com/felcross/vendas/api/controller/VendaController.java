@@ -17,15 +17,20 @@ import java.util.List;
 @Tag(name = "Vendas")
 @SecurityRequirement(name = "bearerAuth")
 public class VendaController {
+
     private final VendaService service;
 
     @PostMapping @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Criar venda")
-    public VendaResponse criar(@Valid @RequestBody VendaRequest req) { return service.criar(req); }
+    public VendaResponse criar(@Valid @RequestBody VendaRequest req) {
+        return service.criar(req);
+    }
 
     @GetMapping("/{id}")
     @Operation(summary = "Buscar venda por ID")
-    public VendaResponse buscar(@PathVariable String id) { return service.buscarPorId(id); }
+    public VendaResponse buscar(@PathVariable String id) {
+        return service.buscarPorId(id);
+    }
 
     @GetMapping("/cliente/{clienteId}")
     @Operation(summary = "Listar vendas por cliente")
@@ -35,9 +40,13 @@ public class VendaController {
 
     @PatchMapping("/{id}/confirmar")
     @Operation(summary = "Confirmar venda")
-    public VendaResponse confirmar(@PathVariable String id) { return service.confirmar(id); }
+    public VendaResponse confirmar(@PathVariable String id) {
+        return service.confirmar(id);
+    }
 
     @PatchMapping("/{id}/cancelar")
     @Operation(summary = "Cancelar venda")
-    public VendaResponse cancelar(@PathVariable String id) { return service.cancelar(id); }
+    public VendaResponse cancelar(@PathVariable String id) {
+        return service.cancelar(id);
+    }
 }

@@ -6,10 +6,15 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data @Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class VendaResponse {
     private String id;
     private Long clienteId;
+    private String clienteEmail;
     private List<ItemVenda> itens;
     private BigDecimal subtotal;
     private BigDecimal desconto;
