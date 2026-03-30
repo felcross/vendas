@@ -1,4 +1,254 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PropertiesComponent">{}</component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c2f18262-c9d8-4888-aeca-489f91d35c5d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/vendas.test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/api/dto/NotificacaoEmailRecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/business/mapper/VendaMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/business/service/NotificacaoProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/domain/repository/DescontoStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/config/RabbitMQConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/exception/BusinessException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/exception/ConflictException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/exception/ForbiddenException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/exception/IllegalArgumentException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/exception/ResourceNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/exception/UnauthorizedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/feign/config/FeignConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/feign/dto/ClienteDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/feign/dto/ProdutoDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/security/JwtRequestFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/security/JwtUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/felcross/vendas/business/service/VendaServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.0.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.0.0/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.0.0/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.0.0/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.0.0/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.0.0/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.0.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.0.0/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.0.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.0.0/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.0.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.0.0/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.0.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.0.0/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/api/controller/VendaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/api/controller/VendaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/api/dto/ClienteDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/api/dto/ItemVendaRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/api/dto/ItemVendaRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/api/dto/ProdutoDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/api/dto/VendaRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/api/dto/VendaRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/api/dto/VendaResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/api/dto/VendaResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/business/service/DescontoAcimaDe500.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/business/service/DescontoAcimaDe500.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/business/service/DescontoSemDesconto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/business/service/DescontoSemDesconto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/business/service/DescontoStrategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/business/service/VendaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/business/service/VendaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/domain/entity/ItemVenda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/domain/entity/ItemVenda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/domain/entity/Venda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/domain/entity/Venda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/domain/repository/VendaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/domain/repository/VendaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/feign/ClienteClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/feign/ClienteClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/feign/ProdutoClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/feign/ProdutoClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/security/JwtFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/felcross/vendas/infrastructure/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="vendas" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;felcross&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/felcross/vendas.git&quot;,
+    &quot;accountId&quot;: &quot;36203e42-9479-4866-9cfb-5f9ca803e893&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="3B8A7KaC6aQjKTBKSR6nKmn7HRw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Gradle.VendaServiceTest.executor": "Run",
+    "Gradle.vendas [:com.felcross.vendas.VendasApplication.main()].executor": "Run",
+    "Gradle.vendas [test].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "develop",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "//wsl.localhost/Ubuntu/home/fcross/projetos2/vendas-microservicos/vendas/src/main/java/com/felcross/vendas/infrastructure",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu\home\fcross\projetos2\vendas-microservicos\vendas\src\main\java\com\felcross\vendas\infrastructure" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.felcross.vendas.api.dto" />
+      <recent name="com.felcross.vendas.infrastructure.security" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle test" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Gradle.VendaServiceTest">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="21 (WSL)" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.felcross.vendas.VendasApplication" />
+      <module name="vendas.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="21 (WSL)" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.felcross.vendas.VendasApplication" />
+      <module name="vendas.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VendaServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.felcross.vendas.business.service.VendaServiceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="vendas [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.VendaServiceTest" />
+        <item itemvalue="Gradle.vendas [test]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c2f18262-c9d8-4888-aeca-489f91d35c5d" name="Changes" comment="" />
+      <created>1773860154360</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1773860154360</updated>
+    </task>
+    <servers />
+  </component>
 </project>

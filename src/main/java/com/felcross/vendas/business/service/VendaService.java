@@ -1,76 +1,94 @@
 package com.felcross.vendas.business.service;
 
 import com.felcross.vendas.api.dto.*;
+import com.felcross.vendas.business.mapper.VendaMapper;
 import com.felcross.vendas.domain.entity.*;
+import com.felcross.vendas.domain.repository.DescontoStrategy;
 import com.felcross.vendas.domain.repository.VendaRepository;
+import com.felcross.vendas.infrastructure.exception.BusinessException;
+import com.felcross.vendas.infrastructure.exception.ResourceNotFoundException;
 import com.felcross.vendas.infrastructure.feign.*;
+import com.felcross.vendas.infrastructure.feign.dto.ClienteDto;
+import com.felcross.vendas.infrastructure.feign.dto.ProdutoDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class VendaService {
+
     private final VendaRepository repository;
     private final ClienteClient clienteClient;
     private final ProdutoClient produtoClient;
-    private final List<DescontoStrategy> descontoStrategies;
+    private final NotificacaoProducer notificacaoProducer;
+    private final VendaMapper mapper; // Removi a lista de descontos daqui
 
     public VendaResponse criar(VendaRequest req) {
-        // Valida cliente
         ClienteDto cliente = clienteClient.buscar(req.getClienteId());
 
-        // Monta itens e valida estoque
-        List<ItemVenda> itens = req.getItens().stream().map(item -> {
-            ProdutoDto produto = produtoClient.buscar(item.getProdutoId());
-            if (produto.getEstoque() < item.getQuantidade())
-                throw new IllegalArgumentException("Estoque insuficiente: " + produto.getNome());
-            BigDecimal subtotal = produto.getPreco()
-                .multiply(BigDecimal.valueOf(item.getQuantidade()));
+        List<ItemVenda> itens = req.getItens().stream().map(itemReq -> {
+            ProdutoDto produto = produtoClient.buscar(itemReq.getProdutoId());
+
+            if (produto.getEstoque() < itemReq.getQuantidade())
+                throw new BusinessException("Estoque insuficiente para o produto: " + produto.getNome());
+
+            BigDecimal subtotalItem = produto.getPreco()
+                    .multiply(BigDecimal.valueOf(itemReq.getQuantidade()));
+
             return ItemVenda.builder()
-                .produtoId(produto.getId()).nomeProduto(produto.getNome())
-                .quantidade(item.getQuantidade()).precoUnitario(produto.getPreco())
-                .subtotal(subtotal).build();
+                    .produtoId(produto.getId())
+                    .nomeProduto(produto.getNome())
+                    .quantidade(itemReq.getQuantidade())
+                    .precoUnitario(produto.getPreco())
+                    .subtotal(subtotalItem)
+                    .build();
         }).toList();
 
         BigDecimal subtotal = itens.stream()
-            .map(ItemVenda::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
+                .map(ItemVenda::getSubtotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         Venda venda = Venda.builder()
-            .clienteId(cliente.getId()).itens(itens).subtotal(subtotal)
-            .desconto(BigDecimal.ZERO).total(subtotal)
-            .status(StatusVenda.PENDENTE).createdAt(LocalDateTime.now()).build();
+                .clienteId(cliente.getId())
+                .clienteEmail(cliente.getEmail())
+                .itens(itens)
+                .subtotal(subtotal)
+                .desconto(BigDecimal.ZERO)
+                .total(subtotal)
+                .status(StatusVenda.PENDENTE)
+                .createdAt(LocalDateTime.now())
+                .build();
 
-        // Aplica strategy de desconto
-        DescontoStrategy strategy = descontoStrategies.stream()
-            .filter(s -> s.aplicavel(venda) && !(s instanceof DescontoSemDesconto))
-            .findFirst().orElse(new DescontoSemDesconto());
-
-        BigDecimal desconto = strategy.calcular(venda);
-        venda.setDesconto(desconto);
-        venda.setTotal(subtotal.subtract(desconto));
+        // LOGICA DE DESCONTO REMOVIDA DAQUI
 
         Venda salva = repository.save(venda);
 
-        // Decrementa estoque após persistir
         req.getItens().forEach(item ->
-            produtoClient.decrementarEstoque(item.getProdutoId(), item.getQuantidade()));
+                produtoClient.decrementarEstoque(item.getProdutoId(), item.getQuantidade()));
+
+        dispararNotificacaoVenda(salva, cliente);
 
         return toResponse(salva);
     }
 
-    public VendaResponse buscarPorId(String id) { return toResponse(findOrThrow(id)); }
+    public VendaResponse buscarPorId(String id) {
+        return toResponse(findOrThrow(id));
+    }
 
     public List<VendaResponse> listarPorCliente(Long clienteId) {
-        return repository.findByClienteId(clienteId).stream().map(this::toResponse).toList();
+        return repository.findByClienteId(clienteId)
+                .stream().map(this::toResponse).toList();
     }
 
     public VendaResponse confirmar(String id) {
         Venda v = findOrThrow(id);
         if (v.getStatus() != StatusVenda.PENDENTE)
-            throw new IllegalStateException("Venda nao esta pendente");
+            throw new BusinessException("Apenas vendas PENDENTES podem ser confirmadas");
         v.setStatus(StatusVenda.CONFIRMADA);
         return toResponse(repository.save(v));
     }
@@ -78,19 +96,34 @@ public class VendaService {
     public VendaResponse cancelar(String id) {
         Venda v = findOrThrow(id);
         if (v.getStatus() == StatusVenda.CANCELADA)
-            throw new IllegalStateException("Venda ja cancelada");
+            throw new BusinessException("Venda ja esta cancelada");
         v.setStatus(StatusVenda.CANCELADA);
         return toResponse(repository.save(v));
     }
 
     private Venda findOrThrow(String id) {
         return repository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Venda nao encontrada: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Venda nao encontrada: " + id));
     }
 
     private VendaResponse toResponse(Venda v) {
-        return VendaResponse.builder().id(v.getId()).clienteId(v.getClienteId())
-            .itens(v.getItens()).subtotal(v.getSubtotal()).desconto(v.getDesconto())
-            .total(v.getTotal()).status(v.getStatus()).createdAt(v.getCreatedAt()).build();
+        return mapper.toResponse(v);
+    }
+
+    private void dispararNotificacaoVenda(Venda venda, ClienteDto cliente) {
+        Map<String, Object> variaveis = new HashMap<>();
+        variaveis.put("valorTotal", venda.getTotal());
+        variaveis.put("idVenda", venda.getId());
+        variaveis.put("dataVenda", venda.getCreatedAt().toString());
+
+        NotificacaoEmailRecord notificacao = new NotificacaoEmailRecord(
+                venda.getClienteEmail(),
+                "Confirmação de Pedido #" + venda.getId(),
+                cliente.getNome(),
+                "Sua compra foi realizada com sucesso!",
+                variaveis,
+                "confirmacao-venda"
+        );
+        notificacaoProducer.dispararEventoEmail(notificacao);
     }
 }

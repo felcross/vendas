@@ -40,7 +40,23 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
 
+    // Source: https://mvnrepository.com/artifact/io.github.openfeign/feign-hc5
+    implementation 'io.github.openfeign:feign-hc5:13.8'
+
+    // Abstração do Spring para RabbitMQ (AMQP)
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+    // Opcional: Útil para testes de integração com Rabbit
+    testImplementation 'org.springframework.amqp:spring-rabbit-test'
+
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
 
