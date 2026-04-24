@@ -1,36 +1,31 @@
-name: PR Workflow - Quality & Tests
+name: Build & Push — vendas
 
 on:
-  pull_request:
-    branches:
-      - master
-    types: [opened, synchronize, reopened]
+  push:
+    branches: [ "master" ]
 
 jobs:
-  build-and-test:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 # Atualizado para v4 (mais rápido/seguro)
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4 # Atualizado para v4
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
         with:
-          distribution: 'temurin'
-          java-version: '21'
-          cache: 'gradle' # O setup-java já faz o cache do gradle automaticamente agora
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - name: Configura o Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Build and Run Tests
-        # O comando 'build' no Gradle já executa o 'test' por padrão.
-        # Se algum teste falhar, o build falha e o PR fica "vermelho".
-        run: ./gradlew build --stacktrace
-
-      - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v4
-        if: always() # Garante que o relatório seja gerado mesmo se o teste falhar
+      - name: Build e Push da imagem
+        uses: docker/build-push-action@v5
         with:
-          report_paths: '**/build/test-results/test/TEST-*.xml'
+          context: .
+          push: true
+          tags: felcross/vendas:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
