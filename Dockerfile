@@ -1,5 +1,24 @@
-FROM eclipse-temurin:21-jdk-alpine
+# ─── STAGE 1: Build ───────────────────────────────────────────────────────────
+FROM eclipse-temurin:21-jdk-alpine AS builder
 WORKDIR /app
-COPY build/libs/vendas-0.0.1-SNAPSHOT.jar /app/app.jar
+
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle .
+COPY settings.gradle* .
+
+RUN chmod +x gradlew
+RUN ./gradlew dependencies --no-daemon || true
+
+COPY src src
+RUN ./gradlew bootJar --no-daemon -x test
+
+# ─── STAGE 2: Runtime ─────────────────────────────────────────────────────────
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+
+COPY --from=builder /app/build/libs/*.jar app.jar
+
 EXPOSE 8082
-CMD ["java", "-jar", "/app/app.jar"]
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

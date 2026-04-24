@@ -15,7 +15,7 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue queue() {
-        return new Queue(QUEUE_EMAIL, true); // durable: true para não perder a fila se o Rabbit cair
+        return new Queue(QUEUE_EMAIL, false); // durable: true para não perder a fila se o Rabbit cair
     }
 
     @Bean
